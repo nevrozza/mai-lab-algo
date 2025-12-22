@@ -1,10 +1,11 @@
 from collections.abc import Callable
 
 from src.benchmarking.benchmark import benchmark_sorts, timeit_once
-from src.benchmarking.generators import rand_int_array, nearly_sorted, many_duplicates, reverse_sorted
+from src.benchmarking.generators import rand_int_array, nearly_sorted, many_duplicates, reverse_sorted, rand_float_array
 from src.formulas.factorial import factorial, factorial_recursive
 from src.formulas.fibo import fibo, fibo_recursive
 from src.sorts.bubble import bubble_sort
+from src.sorts.bucket import bucket_sort_normalized
 from src.sorts.counting import counting_sort, counting_sort_dict
 from src.sorts.heap import heap_sort
 from src.sorts.quick import quick_sort
@@ -16,10 +17,10 @@ def main():
 
     default_sorts_benchmark(SEED)
     bubble_sort_benchmark(SEED)
+    bucket_sort_benchmark(SEED)
 
     factorial_benchmark()
     fibo_benchmark()
-
     print("\nПу-пу-пу")
 
 
@@ -50,7 +51,7 @@ def default_sorts_benchmark(SEED: int):
 
 
 def bubble_sort_benchmark(SEED: int):
-    # bubble_sort
+    name = "Bubble Sort"
     N = 1_000
     print(f"\nГенерация данных для Bubble Sort (N={N})...")
     arrays = {
@@ -61,17 +62,36 @@ def bubble_sort_benchmark(SEED: int):
     }
 
     algos = {
-        "Bubble Sort": bubble_sort,
+        name: bubble_sort,
     }
 
-    print("Запуск бенчмарка для Bubble Sort...\n")
+    print(f"Запуск бенчмарка для {name}...\n")
     results_bubble = benchmark_sorts(arrays, algos)
 
-    print(f"РЕЗУЛЬТАТЫ (Bubble Sort, N={N}):")
+    print(f"РЕЗУЛЬТАТЫ ({name}, N={N}):")
     _print_results(results_bubble, arrays.keys())
 
 
+def bucket_sort_benchmark(SEED):
+    name = "Bucket Sort"
+    N = 10_000
+    arrays = {
+        "random_10k float": rand_float_array(N, 0, 10_000, seed=SEED),
+    }
+
+    algos = {
+        name: bucket_sort_normalized,
+    }
+
+    print(f"Запуск бенчмарка для {name}...\n")
+    results = benchmark_sorts(arrays, algos)
+
+    print(f"РЕЗУЛЬТАТЫ ({name}, N={N}):")
+    _print_results(results, arrays.keys())
+
+
 def factorial_benchmark():
+    name = "factorial"
     n = 500
     print(f"\nБенчмарк: Factorial (n = {n})")
 
@@ -79,20 +99,21 @@ def factorial_benchmark():
     t_rec = timeit_once(factorial_recursive, n)
 
     print("-" * 40)
-    print(f"{'factorial (iter)':<20} {t_iter:>10.6f} сек")
-    print(f"{'factorial (rec)':<20} {t_rec:>10.6f} сек")
+    print(f"{f'{name} (iter)':<20} {t_iter:>10.6f} сек")
+    print(f"{f'{name} (rec)':<20} {t_rec:>10.6f} сек")
     print("-" * 40)
 
 
 def fibo_benchmark():
+    name = "fibo"
     n = 35
     print(f"\nБенчмарк: Fibonacci (n = {n})")
 
     t_iter = timeit_once(fibo, n)
     t_rec = timeit_once(fibo_recursive, n)
     print("-" * 40)
-    print(f"{'fibo (iter)':<20} {t_iter:>10.6f} сек")
-    print(f"{'fibo (rec)':<20} {t_rec:>10.6f} сек")
+    print(f"{f'{name} (iter)':<20} {t_iter:>10.6f} сек")
+    print(f"{f'{name} (rec)':<20} {t_rec:>10.6f} сек")
     print("-" * 40)
 
 
