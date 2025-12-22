@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 from src.cli.errors import BashNoSupportForLongFlagsError, BashInvalidFlagError, BashMoreParamsThenExpectedError, \
     BashError
 from src.cli.immutable_dict import ImmutableDict
+from src.utils.utils import is_num
 
 
 class BashCommand(ABC):
@@ -68,7 +69,7 @@ class BashCommand(ABC):
         flags: set[str] = set()
         params: list[str] = []
         for par in raw_params:
-            if par.startswith("-") and len(par) > 1:
+            if par.startswith("-") and len(par) > 1 and not is_num(par):
                 if par.startswith("--"):
                     raise BashNoSupportForLongFlagsError
                 for f in par[1:]:
