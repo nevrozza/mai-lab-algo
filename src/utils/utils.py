@@ -11,8 +11,8 @@ def is_num(num: str) -> bool:
         return False
 
 
-def is_int(num: str) -> bool:
+def is_int(num: str, base=10) -> bool:
     try:
-        return int(num) == float(num)
+        return int(num, base=base) == float(num)
     except ValueError:
         return False
