@@ -4,8 +4,7 @@ import pkgutil
 
 def import_packages() -> None:
     packages = [
-        "src.factorial",
-        "src.fibo",
+        "src.formulas",
         "src.sorts",
     ]
 
