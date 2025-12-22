@@ -1,15 +1,6 @@
 from src.utils.commands_abc import SortIntCommand
 
 
-class BubbleCommand(SortIntCommand):
-    def sort(self, lst: list[int]) -> list[int]:
-        return bubble_sort(lst)
-
-    @classmethod
-    def name(cls) -> str:
-        return "bubble"
-
-
 def bubble_sort(a: list[int]) -> list[int]:
     if not a:
         return []
@@ -24,3 +15,12 @@ def bubble_sort(a: list[int]) -> list[int]:
         if not swapped:
             break
     return arr
+
+
+class BubbleCommand(SortIntCommand):
+    def sort(self, lst: list[int]) -> list[int]:
+        return bubble_sort(lst)
+
+    @classmethod
+    def name(cls) -> str:
+        return "bubble"
