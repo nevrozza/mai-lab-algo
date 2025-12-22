@@ -1,10 +1,9 @@
 import inspect
 from abc import ABC, abstractmethod
 
-from src.core.config import BashConfig
-from src.core.errors import BashNoSupportForLongFlagsError, BashInvalidFlagError, BashMoreParamsThenExpectedError, \
+from src.cli.errors import BashNoSupportForLongFlagsError, BashInvalidFlagError, BashMoreParamsThenExpectedError, \
     BashError
-from src.utils.immutable_dict import ImmutableDict
+from src.cli.immutable_dict import ImmutableDict
 
 
 class BashCommand(ABC):
@@ -74,8 +73,7 @@ class BashCommand(ABC):
                     raise BashNoSupportForLongFlagsError
                 for f in par[1:]:
                     if f not in self._supported_flags:
-                        if not BashConfig.IGNORE_EXTRA_FLAGS:
-                            raise BashInvalidFlagError(name=self.name(), flag=f, supported=self._supported_flags)
+                        raise BashInvalidFlagError(name=self.name(), flag=f, supported=self._supported_flags)
                     else:
                         flags.add(f)
             else:

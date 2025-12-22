@@ -1,6 +1,6 @@
 import shlex
 
-from src.core.errors import BashSyntaxError
+from src.cli.errors import BashSyntaxError
 
 
 def get_command_raw_params(command: str) -> tuple[str, list[str]]:
