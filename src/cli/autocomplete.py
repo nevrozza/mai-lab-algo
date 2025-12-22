@@ -142,7 +142,7 @@ class Autocomplete:
 
         if state < len(cls._current_suggestions):
             if len(cls._current_suggestions) == 1:
-                return cls._current_suggestions[0]
+                return cls._current_suggestions[0] + " "
             return cls._current_suggestions[state]
         else:
             return None

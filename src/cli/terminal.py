@@ -29,6 +29,8 @@ class Terminal:
             except KeyboardInterrupt:
                 print("\nBye!")
                 break
+            except Exception as e:  # meow
+                print(e)
 
     @staticmethod
     def _execute_commands(commands: list[BashCommand]):
