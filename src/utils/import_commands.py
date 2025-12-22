@@ -1,9 +1,22 @@
 import importlib
+import pkgutil
 
 
-def import_commands() -> None:
-    # TODO
-    importlib.import_module("src.factorial.factorial_command")
-    importlib.import_module("src.fibo.fibo_command")
-    importlib.import_module("src.sorts.bubble")
-    importlib.import_module("src.sorts.quick")
+def import_packages() -> None:
+    packages = [
+        "src.factorial",
+        "src.fibo",
+        "src.sorts",
+    ]
+
+    for package_name in packages:
+        try:
+            package = importlib.import_module(package_name)
+        except ImportError:
+            continue
+
+        for _, module_name, y in pkgutil.iter_modules(package.__path__, package.__name__ + "."):
+            try:
+                importlib.import_module(module_name)
+            except ImportError as e:
+                print(e)
