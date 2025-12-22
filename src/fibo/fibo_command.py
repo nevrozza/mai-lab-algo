@@ -1,5 +1,5 @@
 from src.fibo.fibo import fibo_recursive, fibo
-from src.utils.default_command import DefaultCommand
+from src.utils.commands_abc import DefaultCommand
 
 
 class FiboCommand(DefaultCommand):

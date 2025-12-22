@@ -29,6 +29,8 @@ class Terminal:
             except KeyboardInterrupt:
                 print("\nBye!")
                 break
+            except MemoryError:
+                print("memory error")
             except Exception as e:  # meow
                 print(e)
 
