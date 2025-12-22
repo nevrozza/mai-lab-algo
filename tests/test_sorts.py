@@ -22,7 +22,7 @@ SEED = 42
 
 DEFAULT_TEST_ARRAYS = [
     [], [42], [1, 2, 3, 4, 5], [5, 4, 3, 2, 1],
-    [3, 1, 4, 1, 5, 9, 2, 6, 5], [7, 7, 7],
+    [3, 1, 4, 1, 5, 9, 2, 6, 5], [7, 7, -7],
     reverse_sorted(N), many_duplicates(N, k_unique=10, seed=SEED),
     nearly_sorted(N, swaps=N // 100, seed=SEED), rand_int_array(N, 0, 10_000, seed=SEED)
 ]

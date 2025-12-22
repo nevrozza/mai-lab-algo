@@ -26,7 +26,6 @@ def main():
 
 def default_sorts_benchmark(SEED: int):
     N = 100_000
-    print(f"Генерация массивов (N={N})...")
     arrays = {
         "random_10k": rand_int_array(N, 0, 10_000, seed=SEED),
         "nearly_sorted": nearly_sorted(N, swaps=N // 100, seed=SEED),
@@ -43,17 +42,16 @@ def default_sorts_benchmark(SEED: int):
         "Heap Sort": heap_sort,
     }
 
-    print("Запуск бенчмарка...\n")
+    print("Мурчим...\n")
     results_fast: dict[str, dict[str, float]] = benchmark_sorts(arrays, algos)
 
-    print(f"РЕЗУЛЬТАТЫ (основные сортировки, N={N}):")
+    print(f"Основные сортировки, N={N}")
     _print_results(results_fast, arrays.keys())
 
 
 def bubble_sort_benchmark(SEED: int):
     name = "Bubble Sort"
     N = 1_000
-    print(f"\nГенерация данных для Bubble Sort (N={N})...")
     arrays = {
         "random_1k": rand_int_array(N, 0, 10_000, seed=SEED),
         "nearly_1k": nearly_sorted(N, swaps=N // 100, seed=SEED),
@@ -65,10 +63,10 @@ def bubble_sort_benchmark(SEED: int):
         name: bubble_sort,
     }
 
-    print(f"Запуск бенчмарка для {name}...\n")
+    print(f"\nЗапуск бенчмарка для {name}...\n")
     results_bubble = benchmark_sorts(arrays, algos)
 
-    print(f"РЕЗУЛЬТАТЫ ({name}, N={N}):")
+    print(f"{name}, N={N}")
     _print_results(results_bubble, arrays.keys())
 
 
@@ -83,17 +81,17 @@ def bucket_sort_benchmark(SEED):
         name: bucket_sort_normalized,
     }
 
-    print(f"Запуск бенчмарка для {name}...\n")
+    print(f"\nЗапуск бенчмарка для {name}...\n")
     results = benchmark_sorts(arrays, algos)
 
-    print(f"РЕЗУЛЬТАТЫ ({name}, N={N}):")
+    print(f"{name}, N={N}")
     _print_results(results, arrays.keys())
 
 
 def factorial_benchmark():
     name = "factorial"
     n = 500
-    print(f"\nБенчмарк: Factorial (n = {n})")
+    print(f"\nFactorial, n = {n}")
 
     t_iter = timeit_once(factorial, n)
     t_rec = timeit_once(factorial_recursive, n)
@@ -107,7 +105,7 @@ def factorial_benchmark():
 def fibo_benchmark():
     name = "fibo"
     n = 35
-    print(f"\nБенчмарк: Fibonacci (n = {n})")
+    print(f"\nFibonacci, n = {n}")
 
     t_iter = timeit_once(fibo, n)
     t_rec = timeit_once(fibo_recursive, n)

@@ -1,10 +1,8 @@
-from typing import List
-
 
 class QueueOnStacks:
     def __init__(self) -> None:
-        self._stack_in: List[int] = []
-        self._stack_out: List[int] = []
+        self._stack_in: list[int] = []
+        self._stack_out: list[int] = []
 
     def enqueue(self, x: int) -> None:
         """Добавить элемент в конец очереди"""
