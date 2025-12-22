@@ -1,5 +1,5 @@
 from src.factorial.factorial import factorial_recursive, factorial
-from src.utils.default_command import DefaultCommand
+from src.utils.commands_abc import DefaultCommand
 
 
 class FactorialCommand(DefaultCommand):

@@ -25,3 +25,14 @@ class DefaultCommand(BashCommand, ABC):
         for p in self._params:
             self.validate_param(p)
         return []
+
+
+class SortIntCommand(DefaultCommand):
+
+    @abstractmethod
+    def sort(self, lst: list[int]) -> list[int]:
+        pass
+
+    def solve(self) -> str:
+        sorted_lst = self.sort([int(i) for i in self._params])
+        return " ".join(str(x) for x in sorted_lst)
